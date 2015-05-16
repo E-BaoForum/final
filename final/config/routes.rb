@@ -11,4 +11,21 @@ Rails.application.routes.draw do
   patch '/forums/:id' => 'forums#update'
 
   delete '/forums/:id' => 'forums#destroy'
+
+  ##### Sign Up and Sign In and Sign Out
+  get '/signup' => 'users#new'
+  post '/users' => 'users#create'
+  post '/sessions' => 'sessions#create'
+
+  ##### Page for a new session (login)
+  get '/signin' => 'sessions#new' 
+  ##### Create a new session
+  post '/sessions' => 'sessions#create'
+  ##### Delete a session (signout)
+  get '/signout' => 'sessions#destroy'
+
+  ##### Show and edit the user
+  get '/users/:id' => 'users#show', :as => 'user'
+  get '/users/:id/edit' => 'users#edit', :as => 'user_edit'
+  patch '/users/:id' => 'users#update'
 end

@@ -1,0 +1,15 @@
+<% if session[:user_id] == @user.id %>
+<%= link_to "Edit Your Profile", user_edit_url(@user.id) %>
+<% end %>
+<h2 style="color:red;">User Name:<h2>
+<p><%= @user.user_name %><p>
+<h2 style="color:red;">Level:<h2>
+<p><%= @user.level %><p>
+<h2 style="color:red;">Gender:<h2>
+<p><%= @user.gender %><p>
+<h2 style="color:red;">Real Name:<h2>
+<p><%= @user.real_name %><p>
+<h2 style="color:red;">Address:<h2>
+<p><%= @user.address %><p>
+<h2 style="color:red;">E-mail:<h2>
+<p><%= @user.email %><p>

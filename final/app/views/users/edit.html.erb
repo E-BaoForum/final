@@ -1,0 +1,10 @@
+<style>
+  label { width: 100px; vertical-align: middle;}
+</style>
+
+<%= form_tag user_url(@user.id), :method => 'patch' do %>
+  <p><label>Real Name:</label> <input name="real_name" size="30" value="<%= @user.real_name %>"></p>
+  <p><label>Address:</label> <input name="address" size="30" value="<%= @user.address %>"></p>
+  <p><label>Email:</label> <input name="email" size="30" value="<%= @user.email %>"></p>
+  <p><button>Submit</button></p>
+<% end %>

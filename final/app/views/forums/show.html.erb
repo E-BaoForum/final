@@ -1,7 +1,23 @@
-<%= link_to "Edit", forum_edit_url(@forum.id) %>
+<% if !session[:user_id].nil? && User.find_by(id: session[:user_id]).user_name == @forum.admin_user %>
+<%= link_to "Edit Your Forum", forum_edit_url(@forum.id) %>
+<%= link_to "Delete Your Forum", forum_url(@forum.id), :method => 'delete' %>
+<% end %>
 <h2 style="color:red;">Name:<h2>
 <p><%= @forum.forum_name %><p>
 <h2 style="color:red;">Description:<h2>
 <p><%= @forum.description %><p>
 <h2 style="color:red;">Administrator:<h2>
-<p><%= @forum.admin_user %><p>
+<p><%= link_to @forum.admin_user, user_url(User.find_by(user_name: @forum.admin_user).id) %><p>
+
+<h2 style="color:green;">Posts:<h2>
+<ul>
+  <% if !@posts.nil? %>
+  <% @posts.each do |post| %>
+    <li>
+      <%= link_to post.poster, user_url(User.find_by(user_name: post.poster).id) %>
+      <%= post.title %><p>
+      <%= post.content %>
+    </li>
+  <% end %>
+  <% end %>
+</ul>

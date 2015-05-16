@@ -5,17 +5,23 @@ class ForumsController < ApplicationController
 
   def show
     @forum = Forum.find(params[:id])
+    @posts = Post.where(forum_name: @forum.forum_name)
   end
 
   def new
+    @forum = Forum.new
   end
 
   def create
-  	Forum.create forum_name: params[:forum_name],
+  	@forum = Forum.create forum_name: params[:forum_name],
                  description: params[:description],
-                 admin_user: params[:admin_user]
+                 admin_user: User.find_by(id: session[:user_id]).user_name
 
-    redirect_to root_url
+    if @forum.save
+      redirect_to root_url, notice: "Forum Created."
+    else
+      render "new"
+    end
   end
 
   def edit
@@ -26,7 +32,7 @@ class ForumsController < ApplicationController
     @forum = Forum.find(params[:id])
     @forum.update forum_name: params[:forum_name],
                  description: params[:description],
-                 admin_user: params[:admin_user]
+                 admin_user: User.find_by(id: session[:user_id]).user_name
 
     redirect_to forum_url(@forum.id)
   end

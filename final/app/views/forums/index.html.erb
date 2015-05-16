@@ -1,5 +1,7 @@
 <html>
-  <p><%= link_to "Add a New Forum", forums_new_url %></p>
+<% if !session[:user_id].nil? %>
+  <p><%= link_to "Add a New Forum Which You Can Administrate.", forums_new_url %></p>
+<% end %>
 
 <ul>
 
@@ -7,7 +9,6 @@
     <li>
       <%= link_to forum.forum_name, forum_url(forum.id) %>
       <%= forum.description %>
-      <%= link_to "(delete)", forum_url(forum.id), :method => 'delete' %>
     </li>
   <% end %>
 
